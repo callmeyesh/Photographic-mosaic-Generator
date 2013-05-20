@@ -1,0 +1,107 @@
+Mosnuic Version 3 12/06/2012
+
+Yeshwanth Venkatesh  Email: yesh89@ccs.neu.edu
+
+CONTENTS
+
+1. INTRODUCTION
+2. FEATURES AND BENEFITS
+3. HOW TO START THE SOFTWARE
+4. MINIMUM SYSTEM REQUIREMENTS
+5. LICENSE
+
+1. INTRODUCTION
+
+Mosnuic enables the user to generate a photomosaic, that resembles a given 
+target image by using a set of tiles provided.
+
+2. FEATURES
+
+Mosnuic requires the user to specify the path to a target image and
+the path to a set of tiles to be used in order to generate the photomosaic. 
+It also allows the user to specify the path to an output file and the reuse 
+limit of each tile. The path to the output file and the reuse limit are 
+optional.
+
+3. HOW TO START THE SOFTWARE
+
+LINUX MACHINE (standard configuration)
+
+Step 1. Start the Terminal Application.  
+Step 2. Move to the directory where you have downloaded the software.  
+Step 3. Extract the downloaded software into a desired folder by using the
+        following command: 
+        tar -C /<extract_folder> -zxvf mosnuic.tgz
+Step 4. Move to the directory where you have extracted the software and
+        execute the following command:
+
+        ./mosnuic file1 dir2 [-o file3] [-r n4]
+
+        where
+
+        file1 is a Linux path for an existing file that contains the target
+        image. 
+
+        dir2 is a Linux path for an existing directory that contains the 
+        tiles. 
+
+        file3 is a Linux path for the image file to be created. 
+
+        n4 is the maximum number of times a tile may be used. 
+
+
+The square brackets in [-o file3] and [-r n4] are meta-symbols, and are not
+part of the literal syntax of a command line. These square brackets indicate 
+that the -o and -r are optional parameters. If any option appears more than 
+once on the command line, the software will report an error. The software 
+allows the options to appear anywhere in the command line following the path 
+to the executable file (In other words the software allows the options to 
+appear before file1, between file1 and dir2 or after dir2). The file1 and dir2 
+should be provided in the same order. 
+
+The software supports the following image formats:
+
+BMP  (bitmap image file)
+GIF  (Graphics Interchange Format)
+JPEG (Joint Photographic Experts Group)
+PNG  (Portable Network Graphics)
+TIFF (Tagged Image File Format)
+
+The software requires at least one tile in dir2. This version of the software 
+requires all the tile images to be in the same format. The width of each tile 
+must be a divisor of the width of the target image, and the height of each tile 
+must be a divisor of the height of the target image. 
+
+If the [-o file3] option is not provided on the command line, then file3 will 
+be constructed from file1 by inserting "_out" before the suffix (if any) and 
+file3 will have the same format as file1. 
+
+If the [-o file3] option is provided on the command line, and file3 ends in
+".bmp", ".gif", ".jpeg", ".jpg", ".png", or ".tiff", then the format of the 
+output image is implied by that suffix. If file3 does not end with one of 
+these suffixes, then the format of the output image is the same as the target 
+image(file1). 
+
+If file3 already exists then the software will overwrite the file with the 
+output image.  
+
+This version of the software generates the output image (file3) with the same
+dimensions (in pixels) as that of the target image.  
+
+If the [-r n4] option is supplied, then n4 must be an unsigned integer.  
+If it is not possible to construct an output image with the tile restriction
+in place, then the software will terminate. 
+
+If n4 is not provided then there is no limit on the number of times a single 
+tile is used in the output image. 
+
+4. MINIMUM SYSTEM REQUIREMENTS
+
+LINUX MACHINE
+a. Standard Configuration.
+b. Image processing Library(ImageMagick)[Required]. 
+
+5. LICENSE
+
+Copyright © 2012  Yeshwanth Venkatesh. 
+

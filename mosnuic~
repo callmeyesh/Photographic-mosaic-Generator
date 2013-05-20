@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function usage ()
+{
+cat <<EOF
+Usage: ./mosnuic.sh file1 dir2 [-o file3] [-r n4]
+where
+
+    file1 is a Linux path for an existing file that contains
+    the target image.
+
+    dir2 is a Linux path for an existing directory that
+    contains the tiles.
+
+    file3 is a Linux path for the image file to be created.
+
+    n4 is the maximum number of times a tile may be used.
+
+EOF
+   exit 0
+}
+
+die() {
+    echo >&2 $@
+    exit 1
+}
+
+declare -a vars_1_2
+var1='' var2='' var3='' var4=''
+while [ "$1" ];do
+    case $1 in
+        -o ) [ "$var3" ] && usage 
+             shift
+             var3=$1
+             shift
+             ;;
+        -r ) [ "$var4" ] && usage  
+             shift
+             var4=$1
+             shift
+             ;;
+        * ) vars_1_2+=($1) ; shift ;;
+    esac
+done
+[ ${#vars_1_2[@]} -ne 2 ] && \
+    usage
+var1=${vars_1_2[0]}
+var2=${vars_1_2[1]}
+
+if [ -z "$var3" ] && [ -z "$var4" ]; then
+time /usr/bin/java -jar photomosaic.jar $var1 $var2
+elif [ -z "$var3" ]; then
+time /usr/bin/java -jar photomosaic.jar $var1 $var2 -r $var4
+elif [ -z "$var4" ]; then
+time /usr/bin/java -jar photomosaic.jar $var1 $var2 -o $var3
+else
+time /usr/bin/java -jar photomosaic.jar $var1 $var2 -o $var3 -r $var4
+fi
